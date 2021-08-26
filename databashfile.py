@@ -19,6 +19,8 @@ students_name.grid(row=0,column=1,padx=20 )
 student_Id = Entry(root, width =30)
 student_Id.grid(row=1,column=1)
 
+print("works")
+
 
 
 students_location = Entry(root, width=30)
@@ -56,8 +58,11 @@ address_label = Label(root,text="students address")
 address_label.grid(row = 2,column= 0)
 
 
+
 conn.commit()
 conn.close()
+
+
 
 
 mainloop()

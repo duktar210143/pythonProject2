@@ -36,6 +36,21 @@ def submit():
 
     conn.close()
 
+def query():
+
+    conn = sqlite3.connect("school_datas.db")
+
+    c = conn.cursor()
+
+    #query of the database
+    c.execute("SELECT *, oid FROM addresses")
+
+    records = c.fetchall()
+    print(records)
+
+    conn.commit()
+    conn.close()
+
 
 students_name = Entry(root, width= 30)
 students_name.grid(row=0,column=1,padx=20 )
@@ -77,14 +92,19 @@ radio_label = Label(root,text=r.get())
 radio_label.grid(row=5,column=1)
 
 gender_label = Label(root,text = "students gender")
-gender_label.grid(row= 4,column = 0)
+gender_label.grid(row=4,column =0)
 
 
 address_label = Label(root,text="students address")
-address_label.grid(row = 2,column= 0)
+address_label.grid(row=2,column=0)
 
 submit_button = Button(root,text="add records",command = submit)
-submit_button.grid(row = 6,column =0 )
+submit_button.grid(row=6,column=0)
+
+# creatting a query button
+
+query_btn = Button(root, text = "Show records", command = query)
+query_btn.grid(row=7,column=1 )
 
 
 conn.commit()

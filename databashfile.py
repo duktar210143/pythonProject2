@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import messagebox
 import sqlite3
-import pytest
+import time
+from PIL import Image,ImageTk
 
 
 root = Tk()
@@ -42,7 +43,8 @@ def submit():
 
 
     # show info in message box
-    messagebox.showinfo("addresses","inserted successfully")
+    messagebox.showinfo("addresses","WELCOME\n"
+                                    "you're info is saved ")
 
     conn.commit()
 
@@ -147,6 +149,60 @@ delete_btn.grid(row=14,column=1)
 query_btn = Button(root, text = "Show records", command = query)
 query_btn.grid(row=8,column=1)
 
+# creating a new window
+def open():
+    global info
+    top = Toplevel()
+    top.geometry("300x400")
+    info = ImageTk.PhotoImage(Image.open("schooldb.png"))
+    my_label = Label(top,image = info)
+    my_label.pack(pady=10)
+    label_info = Label(top,text="centinnial is a prestigious institute of capable teachers \n  and well trained staffs. "
+                                "We'd like to welcome you to \n our page  . Our school facilates every needs and desires"
+                                "\n and also provide the highest quality education with \n the best quality of life . The "
+                                " students from around the \n globe study here . so the eco-sytem here is non bias \n every one"
+                                " is treated equally."
+                                "we also have hosteling \n facility  We hope you get the future that you are seeking "
+                                "\n from our collage and succeed in life"
+                                " \n (THANK YOU )",bg="white",fg="red"
+                                )
+    label_info.pack()
+    btn = Button(top,text="close window",command=top.destroy)
+
+    btn.pack()
+
+
+label_sc = Label(root,text = "to know more about school",bg="black",fg="white")
+label_sc.grid(row=16,column=0)
+
+
+buttn = Button(root,text= "click Here",command=open,bg="grey",fg="white")
+buttn.grid(row=18,column=0)
+
+# creating a clock
+
+
+def clock():
+    hour = time.strftime("%I")
+    minute = time.strftime("%M")
+    second = time.strftime("%S")
+    day = time.strftime("%A")
+    my_label.config(text=hour + ":" + minute + ":" + second)
+    my_labe2.config(text=day)
+    my_label.after(1000, clock)
+
+def update():
+    my_label.config(text="new text")
+
+
+my_label = Label(root,text= "",font=("Helvetica",28),fg="white",bg="light grey")
+my_label.grid(row = 42,column = 0)
+
+my_labe2 = Label(root,text="",font=("Helvetica",14))
+my_labe2.grid(row=40,column=0,pady=29)
+clock()
+
+#my_label.after(5000,update)
 
 conn.commit()
 
